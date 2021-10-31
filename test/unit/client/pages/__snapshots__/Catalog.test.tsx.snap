@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Страница Catalog Корректный снапшот страницы без товаров 1`] = `
+<div
+  className="Catalog"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col"
+    >
+      <h1>
+        Catalog
+      </h1>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    LOADING
+  </div>
+</div>
+`;
