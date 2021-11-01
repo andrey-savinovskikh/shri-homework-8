@@ -12,9 +12,17 @@ export author
 export date
 export changelog
 
-addResultCode=$(bash ./.github/workflows/sh/addTask.sh)
+searchResult=$(bash ./.github/workflows/sh/searchTask.sh)
+
+addResult=$(bash ./.github/workflows/sh/addTask.sh)
+
+#if [ "$addResultCode" -eq 409 ]
+#then
+#  updateResultCode=$(bash ./.github/workflows/sh/addTask.sh)
+#fi
 
 echo "Result:"
-echo "${addResultCode}"
+echo "${searchResult}"
+echo "${addResult}"
 
 echo "Release Completed!"
