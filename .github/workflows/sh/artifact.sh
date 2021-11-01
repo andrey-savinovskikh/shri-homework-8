@@ -3,7 +3,8 @@
 curTag=$(git tag | sort -r | head -1)
 imageName="shri-homework-8:${curTag}"
 
-docker build -t "${imageName}" .
+docker build -t ubuntu-test:latest .
+#docker build -t "${imageName}" .
 
 if [ $? -ne 0 ]
 then
