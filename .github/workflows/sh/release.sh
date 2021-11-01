@@ -34,7 +34,7 @@ echo "${codeFirstNum}"
 
 if [ "$codeFirstNum" = "2" ]
 then
-  echo "Release Completed!"
+  echo "Release Completed"
   exit 0
 else
   echo "Error"
