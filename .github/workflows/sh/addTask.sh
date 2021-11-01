@@ -11,7 +11,7 @@ request='{
   "unique": "'"${TRACKER_UNIQUE_PREFIX}"'_'"${curTag}"'"
 }'
 
-curl -o /dev/null -s -w "%{http_code}\n" \
+curl -s -w "HTTPSTATUS:%{http_code}" \
 --location --request POST "${url}" \
 --header "${headerContentType}" \
 --header "${headerAuth}"  \

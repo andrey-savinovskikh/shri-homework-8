@@ -20,7 +20,19 @@ export taskId
 if [ -z "$taskId" ]
 then
   echo "Добавление новой задачи"
-  resultCode=$(bash ./.github/workflows/sh/addTask.sh)
+  addResult=$(bash ./.github/workflows/sh/addTask.sh)
+  addResultCode=$(echo "${addResult}" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+  addBody=$(echo "${addResult}" | sed -e 's/HTTPSTATUS\:.*//g')
+  taskId=$(echo "${addBody}" | awk -F '"id":"' '{print $2;exit;}' | awk -F '","' '{print $1;exit;}')
+
+  echo "${addResult}"
+  echo "${addResultCode}"
+  echo "${addBody}"
+  echo "${taskId}"
+
+  resultCode=${addResultCode}
+
+  echo "${resultCode}"
 else
   echo "Обновление задачи"
   resultCode=$(bash ./.github/workflows/sh/updateTask.sh)
