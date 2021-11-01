@@ -26,4 +26,4 @@ fi
 echo "Result:"
 echo "${resultCode}"
 
-echo "Release Completed!!"
+echo "Release Completed!"
