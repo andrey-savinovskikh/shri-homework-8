@@ -15,6 +15,6 @@ export changelog
 addResultCode=$(bash ./.github/workflows/sh/addTask.sh)
 
 echo "Result:"
-echo addResultCode
+echo "${addResultCode}"
 
 echo "Release Completed!"
