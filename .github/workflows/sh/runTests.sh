@@ -6,9 +6,11 @@ date=$(git show "$curTag" -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' --no
 
 npm ci
 npm run build
-results=$(npm run test 2>&1 | tail -n 4 | tr -s "\n" "\\n")
+results=$(npm run test 2>&1 | tr "\n" " ")
 
 echo "Тесты проведены"
+
+echo "${results}"
 
 url="$TRACKER_HOST/v2/issues/"
 headerAuth="Authorization: OAuth ${TRACKER_TOKEN}"
