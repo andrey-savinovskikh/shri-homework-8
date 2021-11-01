@@ -5,7 +5,7 @@ author=$(git show "$curTag" --pretty=format:"%an" --no-patch)
 date=$(git show "$curTag" --pretty=format:"%ar" --no-patch)
 imageName="shri-homework-8:${curTag}"
 
-docker build -t "${imageName}" .
+docker build -t -q "${imageName}" .
 
 if [ $? -ne 0 ]
 then
@@ -33,8 +33,6 @@ resultCode=$(
   --header "${headerOrganization}" \
   --data "${request}"
 )
-
-echo "${resultCode}"
 
 codeFirstNum=$(echo "${resultCode}" | cut -c 1)
 
