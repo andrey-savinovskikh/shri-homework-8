@@ -25,9 +25,9 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 <Image />
             </div>
             <div className="col-12 col-sm-7 col-lg-6">
-                <h1 className={bem("Name")}>{product.name}</h1>
-                <p className={bem("Description")}>{product.description}</p>
-                <p className={bem("Price", ['fs-3'])}>${product.price}</p>
+                <h1 className={bem("Name")}>1</h1>
+                <p className={bem("Description")}>2</p>
+                <p className={bem("Price", ['fs-3'])}>3</p>
                 <p>
                     <button className={bem("AddToCart", ['btn', 'btn-primary', 'btn-lg'])} onClick={onClick}>Add to Cart</button>
                     <CartBadge id={product.id} />
