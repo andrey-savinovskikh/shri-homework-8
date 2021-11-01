@@ -22,6 +22,7 @@ jobs:
           TRACKER_TOKEN: ${{secrets.TRACKER_TOKEN}}
           TRACKER_UNIQUE_PREFIX: 'savinovskikh'
 
+
       - shell: bash
         run: sh ./.github/workflows/sh/artifact.sh
         env:
