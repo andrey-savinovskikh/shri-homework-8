@@ -17,15 +17,12 @@ taskId=$(echo "$searchResult" | awk -F '"id":"' '{print $2;exit;}' | awk -F '","
 
 export taskId
 
-echo "${taskId}"
-
 if [ -z "$taskId" ]
 then
-  echo "Add task"
+  echo "Adding task"
   resultCode=$(bash ./.github/workflows/sh/addTask.sh)
 else
-  echo "Update task"
-
+  echo "Updating task"
   resultCode=$(bash ./.github/workflows/sh/updateTask.sh)
 fi
 
