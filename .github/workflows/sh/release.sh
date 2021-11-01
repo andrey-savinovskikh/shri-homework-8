@@ -4,7 +4,7 @@ curTag=$(git tag | sort -r | head -1)
 prevTag=$(git tag | sort -r | head -2 | tail -1)
 author=$(git show "$curTag" --pretty=format:"%an" --no-patch)
 date=$(git show "$curTag" -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' --no-patch)
-changelog=$(git log "$prevTag".. --pretty=format:"%h - %s (%an, %ar)\n" | tr -s "\n" " ")
+changelog=$(git log "$prevTag".. --pretty=format:"%h - %s (%an, %Y-%m-%d %H:%M:%S)\n" | tr -s "\n" " ")
 
 export curTag
 export prevTag
