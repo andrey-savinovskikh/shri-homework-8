@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
 curTag=$(git tag | sort -r | head -1)
 prevTag=$(git tag | sort -r | head -2 | tail -1)
@@ -19,10 +19,10 @@ export taskId
 
 if [ -z "$taskId" ]
 then
-  echo "Adding task"
+  echo "Добавление новой задачи"
   resultCode=$(bash ./.github/workflows/sh/addTask.sh)
 else
-  echo "Updating task"
+  echo "Обновление задачи"
   resultCode=$(bash ./.github/workflows/sh/updateTask.sh)
 fi
 
@@ -30,10 +30,10 @@ codeFirstNum=$(echo "${resultCode}" | cut -c 1)
 
 if [ "$codeFirstNum" = "2" ]
 then
-  echo "Release Completed"
+  echo "Задача успешно сохранена"
   exit 0
 else
-  echo "Error"
+  echo "Ошибка при сохранении задачи"
   exit 1
 fi
 
