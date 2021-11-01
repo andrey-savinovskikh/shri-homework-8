@@ -17,4 +17,4 @@ bash ./.github/workflows/sh/addTask.sh
 echo "Result:"
 echo $?
 
-echo "Release Completed!!!"
+echo "Release Completed!"
