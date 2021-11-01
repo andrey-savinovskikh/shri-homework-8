@@ -26,11 +26,7 @@ else
   resultCode=$(bash ./.github/workflows/sh/updateTask.sh)
 fi
 
-echo "${resultCode}"
-
 codeFirstNum=$(echo "${resultCode}" | cut -c 1)
-
-echo "${codeFirstNum}"
 
 if [ "$codeFirstNum" = "2" ]
 then
