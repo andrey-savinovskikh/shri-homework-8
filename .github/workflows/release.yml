@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches: [ master ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - shell: bash
+        env:
+          TRACKER_HOST: ${{secrets.TRACKER_HOST}}
+          TRACKER_ORG_ID: ${{secrets.TRACKER_ORG_ID}}
+          TRACKER_QUEUE: ${{secrets.TRACKER_QUEUE}}
+          TRACKER_TOKEN: ${{secrets.TRACKER_TOKEN}}
+          TRACKER_UNIQUE_PREFIX: ${{secrets.TRACKER_UNIQUE_PREFIX}}
+        run: sh ./.github/workflows/scripts/release.sh
