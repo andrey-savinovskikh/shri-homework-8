@@ -19,4 +19,4 @@ export REQUEST_DATA='{
   "unique": "'"$TRACKER_UNIQUE_PREFIX"'_'"$CURRENT_TAG"'"
 }'
 
-echo "Release Completed!"
+echo "Release Completed!!!"
