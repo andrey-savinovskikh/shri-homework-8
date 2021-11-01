@@ -34,7 +34,10 @@ resultCode=$(
   --header "${headerContentType}" \
   --header "${headerAuth}" \
   --header "${headerOrganization}" \
-  --data "${request}"
+  --data '{
+    "queue": "'"${TRACKER_QUEUE}"'",
+    "summary": "Docker image test successfully built",
+  }'
 )
 
 echo "${resultCode}"
