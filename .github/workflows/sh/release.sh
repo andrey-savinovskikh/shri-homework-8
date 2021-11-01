@@ -23,10 +23,9 @@ addResult=$(bash ./.github/workflows/sh/addTask.sh)
 
 #'
 
-taskId=$(echo "$searchResult" | awk -F '"id":"' '{ print $1 }')
+taskId=$(echo "$searchResult" | awk -F '"id":"' '{print $2}')
 
 echo "Result:"
-echo "${searchResult}"
 echo "${taskId}"
 echo "${addResult}"
 
