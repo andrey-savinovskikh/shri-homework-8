@@ -28,7 +28,7 @@ resultCode=$(
   --header "${headerContentType}" \
   --header "${headerAuth}"  \
   --header "${headerOrganization}" \
-  --data "$request"
+  --data "${request}"
 )
 
 echo "${resultCode}"
