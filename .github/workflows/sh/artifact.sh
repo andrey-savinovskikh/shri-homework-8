@@ -5,7 +5,7 @@ author=$(git show "$curTag" --pretty=format:"%an" --no-patch)
 date=$(git show "$curTag" --pretty=format:"%ar" --no-patch)
 imageName="shri-homework-8:${curTag}"
 
-docker build -t -q "${imageName}" .
+docker build -q -t "${imageName}" .
 
 if [ $? -ne 0 ]
 then
