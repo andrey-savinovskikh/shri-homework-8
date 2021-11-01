@@ -6,7 +6,7 @@ headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
 headerContentType="Content-Type: application/json"
 request='{
   "filter": {
-    "unique": "'"$TRACKER_UNIQUE_PREFIX"'_'"${curTag}"'"
+    "unique": "'"${TRACKER_UNIQUE_PREFIX}"'_'"${curTag}"'"
   }
 }'
 
@@ -14,4 +14,4 @@ curl -s --location --request POST "${url}" \
 --header "${headerContentType}" \
 --header "${headerAuth}"  \
 --header "${headerOrganization}" \
---data "$request"
+--data "${request}"

@@ -5,10 +5,10 @@ headerAuth="Authorization: OAuth ${TRACKER_TOKEN}"
 headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
 headerContentType="Content-Type: application/json"
 request='{
-  "queue": "'$TRACKER_QUEUE'",
+  "queue": "'${TRACKER_QUEUE}'",
   "summary": "Release '"${curTag}"' ('"${author}"', '"${date}"')",
   "description": "'"${changelog}"'",
-  "unique": "'"$TRACKER_UNIQUE_PREFIX"'_'"${curTag}"'"
+  "unique": "'"${TRACKER_UNIQUE_PREFIX}"'_'"${curTag}"'"
 }'
 
 curl -o /dev/null -s -w "%{http_code}\n" \
@@ -16,4 +16,4 @@ curl -o /dev/null -s -w "%{http_code}\n" \
 --header "${headerContentType}" \
 --header "${headerAuth}"  \
 --header "${headerOrganization}" \
---data "$request"
+--data "${request}"

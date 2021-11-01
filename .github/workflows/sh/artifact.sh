@@ -23,7 +23,7 @@ request='{
 }'
 
 resultCode=$(
-  curl -o /dev/null -s -w "%{http_code}\n" \
+  curl -s \
   --location --request POST "${url}" \
   --header "${headerContentType}" \
   --header "${headerAuth}" \
