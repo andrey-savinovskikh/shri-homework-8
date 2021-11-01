@@ -13,12 +13,12 @@ fi
 
 echo "Docker-образ создан успешно"
 
-url="$TRACKER_HOST/v2/issues"
+url="$TRACKER_HOST/v2/issues/"
 headerAuth="Authorization: OAuth ${TRACKER_TOKEN}"
 headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
 headerContentType="Content-Type: application/json"
 request='{
-  "queue": "'"$TRACKER_QUEUE"'",
+  "queue": "'"${TRACKER_QUEUE}"'",
   "summary": "Docker image '${imageName}' successfully built",
 }'
 
@@ -26,7 +26,7 @@ resultCode=$(
   curl -o /dev/null -s -w "%{http_code}\n" \
   --location --request POST "${url}" \
   --header "${headerContentType}" \
-  --header "${headerAuth}"  \
+  --header "${headerAuth}" \
   --header "${headerOrganization}" \
   --data "${request}"
 )
