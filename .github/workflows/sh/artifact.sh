@@ -37,6 +37,8 @@ resultCode=$(
   --data '{
     "queue": "'"${TRACKER_QUEUE}"'",
     "summary": "Docker image test successfully built",
+    "description": "123456",
+    "unique": "qwerty"
   }'
 )
 
