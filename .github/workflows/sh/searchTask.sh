@@ -10,7 +10,7 @@ request='{
   }
 }'
 
-curl --location --request POST "${url}" \
+curl -s --location --request POST "${url}" \
 --header "${headerContentType}" \
 --header "${headerAuth}"  \
 --header "${headerOrganization}" \
