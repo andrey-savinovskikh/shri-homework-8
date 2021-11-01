@@ -21,8 +21,13 @@ addResult=$(bash ./.github/workflows/sh/addTask.sh)
 #  updateResultCode=$(bash ./.github/workflows/sh/addTask.sh)
 #fi
 
+#'
+
+taskId=$(echo "$searchResult" | awk -F '"id":"' '{ print $2 }' | awk -F '","' '{ print $1 }')
+
 echo "Result:"
 echo "${searchResult}"
+echo "${taskId}"
 echo "${addResult}"
 
 echo "Release Completed!"

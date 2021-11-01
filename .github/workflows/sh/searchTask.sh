@@ -10,10 +10,9 @@ request='{
   }
 }'
 
-curl -o /dev/null -s -w "%{http_code}\n" \
---location --request PATCH "${url}" \
+curl -o /dev/null -s \
+--location --request POST "${url}" \
 --header "${headerContentType}" \
 --header "${headerAuth}"  \
 --header "${headerOrganization}" \
 --data "$request"
-#| awk -F '"id":"' '{ print $2 }' | awk -F '","' '{ print $1 }'
