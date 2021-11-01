@@ -18,7 +18,7 @@ headerAuth="Authorization: OAuth ${TRACKER_TOKEN}"
 headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
 headerContentType="Content-Type: application/json"
 request='{
-  "queue": "'"${TRACKER_QUEUE}"'",
+  "queue": "'${TRACKER_QUEUE}'",
   "summary": "Docker image '${imageName}' successfully built",
 }'
 
