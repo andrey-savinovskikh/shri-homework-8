@@ -6,9 +6,9 @@ headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
 headerContentType="Content-Type: application/json"
 request='{
   "queue": "'$TRACKER_QUEUE'",
-  "summary": "Release '"$CURRENT_TAG"' ('"$CURRENT_TAG_AUTHOR"', '"$CURRENT_TAG_DATE"')",
-  "description": "'"$CHANGELOG"'",
-  "unique": "'"$TRACKER_UNIQUE_PREFIX"'_'"$CURRENT_TAG"'"
+  "summary": "Release '"${curTag}"' ('"${author}"', '"${date}"')",
+  "description": "'"${changelog}"'",
+  "unique": "'"$TRACKER_UNIQUE_PREFIX"'_'"${curTag}"'"
 }'
 
 curl -o /dev/null -s -w "%{http_code}\n" \
