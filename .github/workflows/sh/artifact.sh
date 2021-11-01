@@ -2,7 +2,7 @@
 
 curTag=$(git tag | sort -r | head -1)
 author=$(git show "$curTag" --pretty=format:"%an" --no-patch)
-date=$(git show "$curTag" --pretty=format:"%ar" --no-patch)
+date=$(git show "$curTag" -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' --no-patch)
 imageName="shri-homework-8:${curTag}"
 
 docker build -q -t "${imageName}" .
