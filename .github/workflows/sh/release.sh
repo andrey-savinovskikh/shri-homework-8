@@ -15,6 +15,8 @@ export changelog
 searchResult=$(bash ./.github/workflows/sh/searchTask.sh)
 taskId=$(echo "$searchResult" | awk -F '"id":"' '{print $2;exit;}' | awk -F '","' '{print $1;exit;}')
 
+echo "${taskId}"
+
 export taskId
 
 if [ -z "$taskId" ]

@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 
 curTag=$(git tag | sort -r | head -1)
+author=$(git show "$curTag" --pretty=format:"%an" --no-patch)
+date=$(git show "$curTag" --pretty=format:"%ar" --no-patch)
 imageName="shri-homework-8:${curTag}"
 
 docker build -t "${imageName}" .
@@ -19,27 +21,17 @@ headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
 headerContentType="Content-Type: application/json"
 request='{
   "queue": "'${TRACKER_QUEUE}'",
-  "summary": "Docker image test successfully built",
+  "summary": "Artifact '"${curTag}"' ('"${author}"', '"${date}"')",
+  "description": "Docker image '"${imageName}"' successfully built"
 }'
 
-echo "${url}"
-echo "${headerAuth}"
-echo "${headerOrganization}"
-echo "${headerContentType}"
-echo "${request}"
-
 resultCode=$(
-  curl -s \
+  curl -o /dev/null -s -w "%{http_code}\n" \
   --location --request POST "${url}" \
   --header "${headerContentType}" \
   --header "${headerAuth}" \
   --header "${headerOrganization}" \
-  --data '{
-    "queue": "'"${TRACKER_QUEUE}"'",
-    "summary": "Docker image test successfully built",
-    "description": "123456",
-    "unique": "qwerty"
-  }'
+  --data "${request}"
 )
 
 echo "${resultCode}"
