@@ -29,4 +29,4 @@ echo "Result:"
 echo "${taskId}"
 echo "${addResult}"
 
-echo "Release Completed!"
+echo "Release Completed!!"
