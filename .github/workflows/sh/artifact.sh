@@ -19,8 +19,14 @@ headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
 headerContentType="Content-Type: application/json"
 request='{
   "queue": "'${TRACKER_QUEUE}'",
-  "summary": "Docker image '${imageName}' successfully built",
+  "summary": "Docker image test successfully built",
 }'
+
+echo "${url}"
+echo "${headerAuth}"
+echo "${headerOrganization}"
+echo "${headerContentType}"
+echo "${request}"
 
 resultCode=$(
   curl -s \
