@@ -9,10 +9,14 @@ export changelog=$(git log "$prevTag".. --pretty=format:"%h - %s (%an, %ar)\n" |
 searchResult=$(bash ./.github/workflows/sh/searchTask.sh)
 taskId=$(echo "$searchResult" | awk -F '"id":"' '{print $2;exit;}' | awk -F '","' '{print $1;exit;}')
 
+echo "${taskId}"
+
 if [ -z "$taskId" ]
 then
+  echo "Add task"
   resultCode=$(bash ./.github/workflows/sh/addTask.sh)
 else
+  echo "Update task"
   export taskId
   resultCode=$(bash ./.github/workflows/sh/updateTask.sh)
 fi
