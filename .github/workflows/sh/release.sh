@@ -12,9 +12,9 @@ export author
 export date
 export changelog
 
-bash ./.github/workflows/sh/addTask.sh
+addResultCode=$(bash ./.github/workflows/sh/addTask.sh)
 
 echo "Result:"
-echo $?
+echo addResultCode
 
 echo "Release Completed!"
