@@ -13,20 +13,17 @@ export date
 export changelog
 
 searchResult=$(bash ./.github/workflows/sh/searchTask.sh)
-
-addResult=$(bash ./.github/workflows/sh/addTask.sh)
-
-#if [ "$addResultCode" -eq 409 ]
-#then
-#  updateResultCode=$(bash ./.github/workflows/sh/addTask.sh)
-#fi
-
-#'
-
 taskId=$(echo "$searchResult" | awk -F '"id":"' '{print $2;exit;}' | awk -F '","' '{print $1;exit;}')
 
+if [ -z "$taskId" ]
+then
+  resultCode=$(bash ./.github/workflows/sh/addTask.sh)
+else
+  export taskId
+  resultCode=$(bash ./.github/workflows/sh/updateTask.sh)
+fi
+
 echo "Result:"
-echo "${taskId}"
-echo "${addResult}"
+echo "${resultCode}"
 
 echo "Release Completed!!"
