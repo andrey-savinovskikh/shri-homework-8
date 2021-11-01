@@ -1,43 +1,31 @@
 #!/usr/bin/env bash
 
-curTag=$(git tag | sort -r | head -1)
-author=$(git show "$curTag" --pretty=format:"%an" --no-patch)
-date=$(git show "$curTag" -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' --no-patch)
-
 npm ci
 npm run build
-results=$(npm run test 2>&1 | tr "\n" " ")
+npm run test
 
-echo "Тесты проведены"
+if [ $? = 0 ]
+  then testsResultText="Тесты прошли успешно"
+  else testsResultText="Тесты провалены"
+fi
 
-echo "${results}"
+echo "${testsResultText}"
 
-url="$TRACKER_HOST/v2/issues/"
-headerAuth="Authorization: OAuth ${TRACKER_TOKEN}"
-headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
-headerContentType="Content-Type: application/json"
-request='{
-  "queue": "'${TRACKER_QUEUE}'",
-  "summary": "Tests results '"${curTag}"' ('"${author}"', '"${date}"')",
-  "description": "'"${results}"'"
+githubActionsUrl="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+export request='{
+  "text": "'"${testsResultText} ${githubActionsUrl}"'"
 }'
 
-resultCode=$(
-  curl -o /dev/null -s -w "%{http_code}\n" \
-  --location --request POST "${url}" \
-  --header "${headerContentType}" \
-  --header "${headerAuth}" \
-  --header "${headerOrganization}" \
-  --data "${request}"
-)
+resultCode=$(bash ./.github/workflows/sh/addComment.sh)
 
 codeFirstNum=$(echo "${resultCode}" | cut -c 1)
 
 if [ "$codeFirstNum" = "2" ]
 then
-  echo "Задача успешно сохранена"
+  echo "Комментарий с результатами тестов успешно сохранен"
   exit 0
 else
-  echo "Ошибка при сохранении задачи"
+  echo "Ошибка при сохранении комментария с результатами тестов"
   exit 1
 fi

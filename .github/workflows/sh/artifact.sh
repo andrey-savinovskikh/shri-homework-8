@@ -1,8 +1,5 @@
 #! /usr/bin/env bash
 
-curTag=$(git tag | sort -r | head -1)
-author=$(git show "$curTag" --pretty=format:"%an" --no-patch)
-date=$(git show "$curTag" -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' --no-patch)
 imageName="shri-homework-8:${curTag}"
 
 docker build -q -t "${imageName}" .
@@ -15,32 +12,19 @@ fi
 
 echo "Docker-образ создан успешно"
 
-url="$TRACKER_HOST/v2/issues/"
-headerAuth="Authorization: OAuth ${TRACKER_TOKEN}"
-headerOrganization="X-Org-Id: ${TRACKER_ORG_ID}"
-headerContentType="Content-Type: application/json"
-request='{
-  "queue": "'${TRACKER_QUEUE}'",
-  "summary": "Artifact '"${curTag}"' ('"${author}"', '"${date}"')",
-  "description": "Docker image '"${imageName}"' successfully built"
+export request='{
+  "text": "Docker-образ '"${imageName}"' создан успешно"
 }'
 
-resultCode=$(
-  curl -o /dev/null -s -w "%{http_code}\n" \
-  --location --request POST "${url}" \
-  --header "${headerContentType}" \
-  --header "${headerAuth}" \
-  --header "${headerOrganization}" \
-  --data "${request}"
-)
+resultCode=$(bash ./.github/workflows/sh/addComment.sh)
 
 codeFirstNum=$(echo "${resultCode}" | cut -c 1)
 
 if [ "$codeFirstNum" = "2" ]
 then
-  echo "Задача успешно сохранена"
+  echo "Комментарий с Docker-образом сохранен успешно"
   exit 0
 else
-  echo "Ошибка при сохранении задачи"
+  echo "Ошибка при сохранении комментария с Docker-образом"
   exit 1
 fi

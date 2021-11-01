@@ -23,23 +23,6 @@ jobs:
           TRACKER_QUEUE: 'TMP'
           TRACKER_TOKEN: ${{secrets.TRACKER_TOKEN}}
           TRACKER_UNIQUE_PREFIX: 'savinovskikh'
-
-      - shell: bash
-        name: Run artifact script
-        run: sh ./.github/workflows/sh/artifact.sh
-        env:
-          TRACKER_HOST: 'https://api.tracker.yandex.net'
-          TRACKER_ORG_ID: ${{secrets.TRACKER_ORG_ID}}
-          TRACKER_QUEUE: 'TMP'
-          TRACKER_TOKEN: ${{secrets.TRACKER_TOKEN}}
-          TRACKER_UNIQUE_PREFIX: 'savinovskikh'
-
-      - shell: bash
-        name: Run test script
-        run: sh ./.github/workflows/sh/runTests.sh
-        env:
-          TRACKER_HOST: 'https://api.tracker.yandex.net'
-          TRACKER_ORG_ID: ${{secrets.TRACKER_ORG_ID}}
-          TRACKER_QUEUE: 'TMP'
-          TRACKER_TOKEN: ${{secrets.TRACKER_TOKEN}}
-          TRACKER_UNIQUE_PREFIX: 'savinovskikh'
+          GITHUB_SERVER_URL: ${{github.GITHUB_SERVER_URL}}
+          GITHUB_REPOSITORY: ${{github.GITHUB_REPOSITORY}}
+          GITHUB_RUN_ID: ${{github.GITHUB_RUN_ID}}

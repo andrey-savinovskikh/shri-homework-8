@@ -25,14 +25,7 @@ then
   addBody=$(echo "${addResult}" | sed -e 's/HTTPSTATUS\:.*//g')
   taskId=$(echo "${addBody}" | awk -F '"id":"' '{print $2;exit;}' | awk -F '","' '{print $1;exit;}')
 
-  echo "${addResult}"
-  echo "${addResultCode}"
-  echo "${addBody}"
-  echo "${taskId}"
-
   resultCode=${addResultCode}
-
-  echo "${resultCode}"
 else
   echo "Обновление задачи"
   resultCode=$(bash ./.github/workflows/sh/updateTask.sh)
@@ -43,9 +36,10 @@ codeFirstNum=$(echo "${resultCode}" | cut -c 1)
 if [ "$codeFirstNum" = "2" ]
 then
   echo "Задача успешно сохранена"
-  exit 0
 else
   echo "Ошибка при сохранении задачи"
-  exit 1
 fi
 
+bash ./.github/workflows/sh/artifact.sh
+
+bash ./.github/workflows/sh/runTests.sh
