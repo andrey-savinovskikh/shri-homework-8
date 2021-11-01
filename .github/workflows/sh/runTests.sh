@@ -6,7 +6,7 @@ date=$(git show "$curTag" --pretty=format:"%ar" --no-patch)
 
 npm ci
 npm run build
-results=$(npm run test 2>&1 | tail -n +3 | tr -s "\n" " ")
+results=$(npm run test 2>&1 | tail -n +3)
 
 echo "Тесты проведены"
 
