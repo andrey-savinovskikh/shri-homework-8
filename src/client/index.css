@@ -17,3 +17,7 @@ p.card-text {
     align-items: center;
     justify-content: center;
 }
+
+.red {
+    background-color: #f00;
+}
